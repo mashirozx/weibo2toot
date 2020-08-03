@@ -1,0 +1,6 @@
+beautifulsoup4==4.9.1
+Pillow==6.2.1
+ffmpy==0.2.3
+feedparser==5.2.1
+Mastodon.py==1.5.1
+filetype==1.0.7
