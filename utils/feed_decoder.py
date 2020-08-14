@@ -63,7 +63,7 @@ def TweetDecoder(rss_data):
   
   # print(soup.prettify())
   # print(str(data))
-  plain_content = unescape(soup.prettify()).replace('\n[?bs4_replace_flag?]',' ').replace('[?bs4_replace_flag?]\n',' ').replace('[?bs4_replace_flag?]','')
+  plain_content = unescape(soup.prettify()).replace('\n[?bs4_replace_flag?]',' ').replace('[?bs4_replace_flag?]\n',' ').replace('[?bs4_replace_flag?]','').replace('\n- ','\n\- ')
   data['plain'] = plain_content + '\n'+config['MASTODON']['SourcePrefix']+' ' + rss_data['link']
   return data 
 
