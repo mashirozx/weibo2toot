@@ -9,6 +9,7 @@ License: MIT
 """
 from bs4 import BeautifulSoup
 from html import unescape
+import re
 from .get_config import GetConfig
 
 config = GetConfig()
@@ -63,7 +64,9 @@ def TweetDecoder(rss_data):
   
   # print(soup.prettify())
   # print(str(data))
-  plain_content = unescape(soup.prettify()).replace('\n[?bs4_replace_flag?]',' ').replace('[?bs4_replace_flag?]\n',' ').replace('[?bs4_replace_flag?]','').replace('\n- ','\n\- ')
+  plain_content = unescape(soup.prettify())
+  plain_content = plain_content.replace('\n[?bs4_replace_flag?]',' ').replace('[?bs4_replace_flag?]\n',' ').replace('[?bs4_replace_flag?]','').replace('\n- ','\n\- ')
+  plain_content = re.sub(r'(#[^#]+)#', lambda m : m.group(1)+' ', plain_content)
   data['plain'] = plain_content + '\n'+config['MASTODON']['SourcePrefix']+' ' + rss_data['link']
   return data 
 
