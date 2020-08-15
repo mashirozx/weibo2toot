@@ -33,11 +33,11 @@ def TweetDecoder(rss_data):
     if (link.has_attr('data-url')):
       if ('://t.cn/' in link.get('data-url')):
         if ('微博视频' in link.getText()):
-          link.replace_with(f'''[?bs4_replace_flag?] {config['MASTODON']['VideoSourcePrefix']} {link.getText()} {link.get('data-url')}[?bs4_replace_flag?]''')
+          link.replace_with(f'''[?bs4_replace_flag?] {config['MASTODON']['VideoSourcePrefix']} {link.getText()} {link.get('data-url')} [?bs4_replace_flag?]''')
         else:
-          link.replace_with(f'''[?bs4_replace_flag?] {config['MASTODON']['ExternalLinkPrefix']} {link.getText()} {link.get('data-url')}[?bs4_replace_flag?]''')
+          link.replace_with(f'''[?bs4_replace_flag?] {config['MASTODON']['ExternalLinkPrefix']} {link.getText()} {link.get('data-url')} [?bs4_replace_flag?]''')
       else:
-        link.replace_with(f'''[?bs4_replace_flag?] {config['MASTODON']['ExternalLinkPrefix']} {link.getText()} {link.get('href')}[?bs4_replace_flag?]''')
+        link.replace_with(f'''[?bs4_replace_flag?] {config['MASTODON']['ExternalLinkPrefix']} {link.getText()} {link.get('href')} [?bs4_replace_flag?]''')
     elif (link.getText()[-1] == '#'):
       link.replace_with(f'''[?bs4_replace_flag?] {link.getText()[:-1]} [?bs4_replace_flag?]''')
     else:
@@ -57,7 +57,7 @@ def TweetDecoder(rss_data):
     image.replace_with('')
 
   for br in soup.find_all('br'):
-    br.replace_with('\n')
+    br.replace_with('<|n>')
 
   for blockquote in soup.find_all('blockquote'):
     blockquote.unwrap()
@@ -65,8 +65,8 @@ def TweetDecoder(rss_data):
   # print(soup.prettify())
   # print(str(data))
   plain_content = unescape(soup.prettify())
-  plain_content = plain_content.replace('\n[?bs4_replace_flag?]',' ').replace('[?bs4_replace_flag?]\n',' ').replace('[?bs4_replace_flag?]','').replace('\n- ','\n\- ')
-  plain_content = re.sub(r'(#[^#]+)#', lambda m : m.group(1)+' ', plain_content)
+  plain_content = plain_content.replace('\n[?bs4_replace_flag?]',' ').replace('[?bs4_replace_flag?]\n',' ').replace('[?bs4_replace_flag?]','').replace('\\n- ','\\n\- ').replace('<|n>','\n')
+  # plain_content = re.sub(r'(#[^#]+)#', lambda m : m.group(1)+' ', plain_content)
   data['plain'] = plain_content + '\n'+config['MASTODON']['SourcePrefix']+' ' + rss_data['link']
   return data 
 
