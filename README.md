@@ -2,7 +2,7 @@
 
 A simple script that transport Weibo content to Mastodon. Based on the Weibo RSS feed powered by [RSSHub](https://rsshub.app).
 
-一个将微博搬运到长毛象的脚本——基于[RSSHub](https://rsshub.app)生成的B站动态RSS。
+一个将微博搬运到长毛象的脚本——基于[RSSHub](https://rsshub.app)生成的微博RSS。
 
 <details>
   <summary>一些说明</summary>
@@ -32,8 +32,8 @@ nano /etc/crontab
 /etc/init.d/cron restart
 ```
 
-Recommand do job hourly:
+Recommand do job every 20 minutes (RSSHub default cache periods):
 ```
 #m h dom mon dow user  command
-13 *    * * *   root    cd /weibo2toot && python3 run.py
+*/20 *    * * *   root    cd /weibo2toot && python3 run.py
 ```
