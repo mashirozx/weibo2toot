@@ -39,7 +39,8 @@ def TootPoster(data):
       media_ids_arr.append(media_post('temp/img%d.png' % id))
 
   try:
-    mastodon.status_post(status=data['plain'], media_ids=media_ids_arr, visibility=config['MASTODON']['TootVisibility'])
+    if '- 转发' not in data['plain']:
+      mastodon.status_post(status=data['plain'], media_ids=media_ids_arr, visibility=config['MASTODON']['TootVisibility'])
   except Exception:
     print(f'ERRO: failed[mastodon.status_post]')
     # for e in Exception:
