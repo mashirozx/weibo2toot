@@ -3,7 +3,7 @@
 """
 Created on May 29, 2020
 Desc: Twitter HTML parser
-Author: Mashiro 
+Author: Mashiro
 URL: https://2heng.xin
 License: MIT
 """
@@ -59,16 +59,19 @@ def TweetDecoder(rss_data):
   for br in soup.find_all('br'):
     br.replace_with('<|n>')
 
+  for div in soup.find_all('div'):
+    div.replace_with('')
+
   for blockquote in soup.find_all('blockquote'):
     blockquote.unwrap()
-  
+
   # print(soup.prettify())
   # print(str(data))
   plain_content = unescape(soup.prettify())
   plain_content = plain_content.replace('\n[?bs4_replace_flag?]',' ').replace('[?bs4_replace_flag?]\n',' ').replace('[?bs4_replace_flag?]','').replace('\n- ','\n\- ').replace('<|n>','\n')
   # plain_content = re.sub(r'(#[^#]+)#', lambda m : m.group(1)+' ', plain_content)
   data['plain'] = plain_content + '\n'+config['MASTODON']['SourcePrefix']+' ' + rss_data['link']
-  return data 
+  return data
 
 if __name__ == '__main__':
   test_video = """
