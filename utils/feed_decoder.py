@@ -45,11 +45,11 @@ def TweetDecoder(rss_data):
 
   for video in soup.find_all('video'):
     # print(video.get('src'))
-    if ('://f.video.weibocdn.com' in video.get('src')):
-      # need to add a reffer i guess.
-      data['video'].append(video.get('src'))
-      data['video_poster'].append(video.get('poster'))
-      video.replace_with('')
+    #if ('://f.video.weibocdn.com' in video.get('src')):
+    # need to add a reffer i guess.
+    data['video'].append(video.get('src'))
+    data['video_poster'].append(video.get('poster'))
+    video.replace_with('')
 
   for image in soup.find_all('img'):
     # print(video.get('src'))
