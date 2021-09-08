@@ -1,5 +1,5 @@
 beautifulsoup4==4.9.1
-Pillow==8.1.1
+Pillow==8.3.2
 ffmpy==0.2.3
 feedparser==5.2.1
 Mastodon.py==1.5.1
