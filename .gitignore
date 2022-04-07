@@ -3,3 +3,4 @@ ffmpeg.exe
 conf.ini
 db.txt
 __pycache__
+venv
