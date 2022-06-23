@@ -1,3 +1,6 @@
+Moved to <https://github.com/mashirozx/feditool/tree/main/packages/rss2toot>   
+项目已重构：<https://github.com/mashirozx/feditool/tree/main/packages/rss2toot>
+
 # weibo2toot
 
 A simple script that transport Weibo content to Mastodon. Based on the Weibo RSS feed powered by [RSSHub](https://rsshub.app).
